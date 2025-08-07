@@ -34,14 +34,32 @@ async function getAllRecords() {
                 <h5 class="card-title">${name}</h5>
                 <p class="card-text">Some quick example text.</p>
                 <a href="${site}" class="card-link">Bakery Link</a>
+                <a class="mt-1 btn-primary mt-2" href="index.html?id=${data.records[i].id}">View Details</a>
             </div>
         </div>
-    
         
         `;
       }
 
       getResultElement.innerHTML = newHtml;
     });
+
+  async function getOneRecord(id) {
+    let jobsResultElement = document.getElementById("bakeries");
+
+    const options = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer pateG7pBF1CkfmcW7.2c666498dc7818660958fea1c0bb95e5e1d33bbdb4871fed8ee5696394e05ce5`,
+      },
+    };
+  }
 }
 getAllRecords();
+
+let idParams = window.location.search.split("?id=");
+if (idParams.length >= 2) {
+    getOneRecord(idParams[1]);
+  } else {
+      getAllRecords()
+    }
