@@ -1,11 +1,15 @@
 body {
    background-color: #d8b695;
+   background-image: url(bakerybackground.png);
+   background-repeat: no-repeat;
+   background-size: cover;
+
 }
 
 /* Navbar container */
 .navbar {
   overflow: hidden;
-  background-color: #333;
+  background-color: #3f3127;
   font-family: Arial;
 }
 
@@ -39,7 +43,7 @@ body {
 
 /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
+  background-color: #9b7659;
 }
 
 /* Dropdown content (hidden by default) */
