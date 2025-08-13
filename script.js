@@ -43,19 +43,50 @@ async function getAllRecords() {
 
       getResultElement.innerHTML = newHtml;
     });
+  }
 
   async function getOneRecord(id) {
-    let jobsResultElement = document.getElementById("bakeries");
+    let getResultElement = document.getElementById("bakeries");
 
     const options = {
       method: "GET",
       headers: {
-        Authorization: `Bearer pateG7pBF1CkfmcW7.2c666498dc7818660958fea1c0bb95e5e1d33bbdb4871fed8ee5696394e05ce5`,
+        Authorization: `Bearer patyyUVgV0jDN68AP.c4716268bb89fcf20813c88f10403594c2e1e6c4be1cb9fd7bca307d838ef39a`,
       },
     };
-  }
+
+    await fetch(`https://api.airtable.com/v0/appEvTziueCGBcypI/Bakeries/${id}`, options)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      getResultElement.innerHTML = ""; 
+
+      let newHtml = "";
+
+        let name = data.records.fields["Name"];
+        let address = data.records.fields["Address"];
+        let phone = data.records.fields["Phone"];
+        let hours = data.records.fields["Hours"];
+        let site = data.records.fields["Site"];
+        let rating = data.records.fields["Google Rating"];
+
+        newHtml += `
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">${name}</h5>
+                <p class="card-text">Some quick example text.</p>
+                <a href="${site}" class="card-link">Bakery Link</a>
+                <a class="mt-1 btn-primary mt-2" href="index.html?id=${data.records[i].id}">View Details</a>
+            </div>
+        </div>
+        
+        `;
+      
+
+      getResultElement.innerHTML = newHtml;
+
+  });
 }
-getAllRecords();
 
 let idParams = window.location.search.split("?id=");
 if (idParams.length >= 2) {
