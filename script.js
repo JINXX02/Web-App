@@ -29,20 +29,23 @@ async function getAllRecords() {
         let image = data.records[i].fields["Image"];
 
         newHtml += `
-        <div class="card" style="width: 18rem;">
-            <a href="oppurtunity.html?id=${data.records[i].id}">${
-          image
-            ? `<img class="card-img-top rounded" alt="${name}" src="${image[0].url}">`
-            : ``
-        }</a>
-            <div class="card-body">
+         <div class="col-md-4 col-lg-3 d-flex">
+            <div class="card flex-fill h-100">
+              <a href="details.html?id=${data.records[i].id}">
+                ${
+                  image
+                    ? `<img class="card-img-top rounded" alt="${name}" src="${image[0].url}" style="height: 200px; object-fit: cover;">`
+                    : ``
+                }
+              </a>
+              <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${name}</h5>
-                <a href="${site}" class="card-link">Site</a>
-                <a class="mt-1 btn-primary mt-2" href="index.html?id=${
-                  data.records[i].id
-                }">View Details</a>
+                <a class="btn btn-primary mt-auto" href="details.html?id=${data.records[i].id}">View Details</a>
+              </div>
             </div>
-        </div>
+          </div>
+
+
         
         `;
       }
@@ -82,16 +85,32 @@ async function getOneRecord(id) {
       let image = data.fields["Image"];
 
       newHtml += `
-        <div class="card" style="width: 18rem;">${
-          image
-            ? `<img class="card-img-top rounded" alt="${name}" src="${image[0].url}">`
-            : ``
-        }</a>
-            <div class="card-body">
-                <h5 class="card-title">${name}</h5>
-                <a href="${site}" class="card-link">Site</a>
-            </div>
+      <div class="card mx-auto" style="max-width: 600px;">
+          ${
+            image
+              ? `<img class="card-img-top" alt="${name}" src="${image[0].url}">`
+              : ``
+          }
+          <div class="card-body">
+            <h3 class="card-title">${name}</h3>
+            <p><strong>Address:</strong> ${address || "N/A"}</p>
+            <p><strong>Phone:</strong> ${phone || "N/A"}</p>
+            <p><strong>Hours:</strong> ${hours || "N/A"}</p>
+            <p><strong>Google Rating:</strong> ${rating || "N/A"}</p>
+            ${
+              mapLink
+                ? `<a href="${mapLink}" target="_blank" class="btn btn-outline-primary me-2">Google Maps</a>`
+                : ``
+            }
+            ${
+              site
+                ? `<a href="${site}" target="_blank" class="btn btn-outline-secondary">Website</a>`
+                : ``
+            }
+            <a href="index.html" class="btn btn-link mt-3">← Back to List</a>
+          </div>
         </div>
+
         
         `;
 
